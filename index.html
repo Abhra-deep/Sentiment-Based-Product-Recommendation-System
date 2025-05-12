@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Product Recommendation</title>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #2e8b57;
+      text-align: center;
+    }
+
+    .label {
+      color: #00688b;
+    }
+
+    .input {
+      padding: 5px;
+      margin: 5px;
+      border: 1px solid #00688b;
+      border-radius: 4px;
+    }
+
+    input[type='submit'] {
+      background-color: #2e8b57;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    footer h3 {
+      text-align: center;
+      color: #2e8b57;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Sentiment Based Product Recommendation</h1>
+  <hr>
+  <br>
+  <form method='POST' action='/predict'>
+    <label class="label" for="input">Enter User Name</label>
+    <input class="input" type="text" id="input" name='user' required>
+    <input type='submit'>
+  </form>
+  <br>
+
+  {% if recommendation %}
+    <hr>
+    <br>Top 5 Recommended Products for <b>{{user}}</b><br>
+    <br>{{recommendation|safe}}<br>
+
+  {% elif user %}
+    <hr>
+    <div>Username {{user}} doesn't exist</div>
+  {% endif %}
+
+  <hr>
+  <h3>How it Works?</h3>
+  <p>
+    Enter the name of one of the users present in the dataset and hit submit. If the name exists,
+  </p>
+  <ul>
+    <li>We will first find the top 20 recommended products based on what other users similar to the current one have bought in the past.</li>
+    <li>Then, we will filter out the top 5 products out of those by classifying the sentiments of the reviews that the products have received.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <h3>
+      <a href="https://github.com/Abhra-deep/Sentiment-Based-Product-Recommendation-System.git">Source Code</a>
+      &#65372; Developed by Abhradeep Chandra Paul &#65372;
+    </h3>
+    <hr>
+  </footer>
+
+</body>
+</html>
